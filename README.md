@@ -1,7 +1,7 @@
 # mall-project
 
 #### 介绍
-本家商城项目--develop分支
+本家商城项目--teacher分支
 
 #### 软件架构
 软件架构说明

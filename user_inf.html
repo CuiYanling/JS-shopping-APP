@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>账户资料</title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/user_inf.css">
+	</head>
+	<body>
+		<header>
+			<img class="arrow-left" src="./img/user_inf/arrow.png" alt="">
+			<span class="title">账户资料</span>
+		</header>
+		<form class="inf_form" action="" method="">
+			<div class="avator">
+				<label class="photo relative" for="photo_up"><img src="./img/user_inf/avatar.jpg" alt=""></label>
+				<input type="file" id="photo_up" class="photo_up">
+				
+			</div>
+			<div class="item">
+				<label for="name">昵称</label><input type="text" name="name" id="name" value="喵喵酱"/>
+			</div>
+			<div class="item">
+				<label >性别</label>
+				<div>
+					<label class="select_helper" for="boy"><input type="radio" checked name="sex" id="boy" value="1"/><span>男</span></label>
+					<label class="select_helper" for="girl"><input type="radio" name="sex" id="girl" value="0"/><span>女 </span></label>
+				</div>				
+			</div>
+			<div class="item">
+				<label for="phone_num">手机</label>
+				<input type="text" name="phone_num" id="phone_num" value="12345678911" />
+			</div>
+			<button type="submit" class="save-btn">保存修改</button>
+		</form>		
+		
+
+		
+	</body>
+</html>

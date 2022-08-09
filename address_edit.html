@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>编辑地址</title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/address_edit.css">
+	</head>
+	<body>
+		<header>
+			<img class="arrow-left" src="./img/address/arrow.png" alt="">
+			<span class="title">编辑地址</span>
+		</header>
+		<form class="address_from" action="">
+			<div>
+				<label for="consignee">收货人：</label><input id="consignee" value="冯奎" name="consignee" type="text">
+			</div>
+			<div>
+				<label for="phone_number">手机号码：</label><input id="phone number" value="1234567911" name="phone number"
+					type="text">
+			</div>
+			<div>
+				<label>所在地区：</label>
+				<span class="selections">
+					<select name="province" id="">
+						<option value="01">山东省</option>
+						<option value="02">浙江省</option>
+						<option value="03">江苏省</option>
+					</select>
+					<select name="city" id="">
+						<option value="11">青岛市</option>
+						<option value="12">济南市</option>
+						<option value="13">济宁市</option>
+					</select>
+					<select name="area" id="">
+						<option value="21">城阳区</option>
+						<option value="22">黄岛区</option>
+						<option value="23">崂山区</option>
+					</select>
+					<select name="road" id="">
+						<option value="31">春阳路</option>
+						<option value="32">流亭路</option>
+						<option value="33">兴安路</option>
+					</select>
+				</span>
+			</div>
+			<div>
+				<label for="">详细地址：</label>
+				<textarea spellcheck ="false" name="detail" >山东省青岛市城阳区流亭街道中享思途杭山校区220701H5</textarea>
+			</div>
+			<div>
+				<label for="zip_code">邮政编码：</label><input id="zip_code" value="266200" name="zip_code" type="text">
+			</div>
+			<div class="default"><label>默认地址：</label><div class="select-box"><img src="./img/address_edit/selected.png" alt=""></div></div>
+
+		</form>
+		<a href="#" class="save-button">
+			保存修改
+		</a>
+	</body>
+</html>

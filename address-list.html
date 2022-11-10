@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>收货地址</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/address.css">
+</head>
+
+<body>
+	<header>
+		<img onclick="history.back()" class="arrow-left" src="./img/address/arrow.png" alt="">
+		<span class="title">收货地址</span>
+	</header>
+	<ul class="address-list">
+
+	</ul>
+
+	<a href="./address_add.html" class="add-button">
+		新建收货地址
+	</a>
+
+	<script src="./js/axios.min.js"></script>
+	<script src="./js/axios.config.js"></script>
+	<script src="./js/utils.js"></script>
+
+
+	<script>
+		var redirect = params('redirect');
+		//查找插入地址列表的位置
+		var oAddressList = document.querySelector('.address-list');
+		//获取收货地址列表
+		axios.get('/address/list')
+			.then(function (res) {
+				//获取成功
+				if (res.status) {
+					console.log(res)
+					//渲染数据
+					res.data.forEach(function (item) {
+						//生成地址列表：
+						var address = `
+		<li>
+			<div class="info" data-id=${item.id}>
+				<div class="top">
+					<span class="name">${item.name}</span>
+					<span class="tel">${item.tel}</span>
+					${item.isDefault === 1 ? '<div class="default">默认</div>' : ''}					
+				</div>
+				<div class="detail">${item.province_name}${item.city_name}${item.county_name}${item.town_name}${item.street}</div>
+			</div>
+			<a href="./address_edit.html?id=${item.id}">
+			  <img class="edit" src="./img/address/edit.png" alt="">
+	  	    </a>
+			 <img data-id="${item.id}" class="remove" src="./img/address/remove.png" alt="">
+		</li>`;
+
+						//插入DOM，插入列表
+						oAddressList.insertAdjacentHTML('beforeend', address);
+
+					});
+
+					var oSelectAddress = oAddressList.querySelectorAll('li .info')
+					oSelectAddress.forEach(function (item) {
+						item.onclick = function () {
+							// console.log(item)
+							if (redirect) {
+								//在SessionStorage存一下地址id(data自定义属性需要使用dataset来获取)
+								console.log(item.dataset.id);
+							    sessionStorage.address_id = item.dataset.id;
+								history.back()
+							} else {
+								return;
+							}
+						}
+
+
+					});
+				}
+			})
+	</script>
+
+	<script>
+		//删除---
+		//默认异步传输，所以在没有生成列表时，就开始查找元素，所以找不到“×号”---so采用事件委托
+		// var oRemove = document.querySelectorAll('.remove');
+
+		// 删除地址---事件委托（此时没有删除数据库里面的地址！！！）
+		var oAddressList = document.querySelector('.address-list');
+		oAddressList.addEventListener('click', function (e) {
+			var isValid = e.target.matches(".remove");
+
+			if (isValid) {
+				//confirm框
+				var isConfirm = confirm("确定删除嘛？");
+				if (!isConfirm) {
+					return;
+				}
+				if (isConfirm) {
+					//提取地址ID(因为axios需要上传地址id)
+					var aid = e.target.dataset.id;
+					axios.post('/address/remove', { id: aid })
+						.then(function (res) {
+							if (res.status) {
+								//删除成功
+								e.target.closest("li").remove();
+							} else {
+								//数据库删除失败
+								alert(res.msg);
+							}
+						});
+				}
+
+
+
+
+			}
+		})
+
+	</script>
+
+
+</body>
+
+</html>

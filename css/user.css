@@ -40,11 +40,10 @@ header .user_inf .user {
 header .user_inf .user .img-box {
 	width: 16.8vw;
 	height: 16.8vw;
-	background: url(../img/user/avatar.jpg) center top no-repeat;
-	background-size: auto 17.7vw;
 	box-shadow: 0vw 0.27vw 0.92vw 0.01vw rgba(0, 0, 0, 0.08);
 	border: solid 0.4vw #ffffff;
 	border-radius: 50%;
+	overflow: hidden;
 }
 
 header .user_inf .user .name {

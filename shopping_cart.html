@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/shopping_cart.css">
+	<title></title>
+</head>
+
+<body>
+	<div class="bg">
+		<div class="part1">
+			<div class="title">
+				<div class="shopping_cart">购物车</div>
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+	<div class="part2">
+		<div class="title">
+			<div class="like">猜你喜欢</div>
+		</div>
+		<div class="box">
+			<div class="box1">
+				<img class="green_bed" src="./img/shopping_cart/04购物车_19.jpg" alt="">
+				<div class="introduction">璀璨灵动 项链</div>
+				<div class="price">￥149</div>
+			</div>
+			<div class="box1">
+				<img class="green_bed" src="./img/shopping_cart/04购物车_21.jpg" alt="">
+				<div class="introduction">JD玉髓锆石镶嵌银项链</div>
+				<div class="price">￥199</div>
+			</div>
+			<div class="box1">
+				<img class="green_bed" src="./img/shopping_cart/04购物车_26.jpg" alt="">
+				<div class="introduction">清新趣粉全棉四件套</div>
+				<div class="price">￥399</div>
+			</div>
+			<div class="box1">
+				<img class="green_bed" src="./img/shopping_cart/04购物车_28.jpg" alt="">
+				<div class="introduction">全棉针织条纹四件套</div>
+				<div class="price">￥219</div>
+			</div>
+			<div class="box1">
+				<img class="green_bed" src="./img/shopping_cart/shopping_cart_22.jpg" alt="">
+				<div class="introduction">色织水洗棉格纹四件套</div>
+				<div class="price">￥219</div>
+			</div>
+			<div class="box1">
+				<img class="pink_box" src="./img/shopping_cart/shopping_cart_19.jpg" alt="">
+				<div class="introduction">20寸全铝镁合金登机箱</div>
+				<div class="price">￥699</div>
+			</div>
+			<div class="box1">
+				<img class="blue_box" src="./img/shopping_cart/shopping_cart_26.jpg" alt="">
+				<div class="introduction">20寸 PC膜拉链登机箱</div>
+				<div class="price">￥249</div>
+			</div>
+			<div class="box1">
+				<img class="gold_box" src="./img/shopping_cart/shopping_cart_27.jpg" alt="">
+				<div class="introduction">104寸纯PC拉链斜纹拉杆箱</div>
+				<div class="price">￥299</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="order">
+		<div class="select">
+			<div class="option">
+				<input class="box" type="checkbox" name="select" value="" />
+				<span class="all_option">全选</span>
+				<span class="final_price">￥<span class="final_price_number">0</span></span>
+			</div>
+		</div>
+		<div class="sure">结算</div>
+	</div>
+	<div class="bottom1">
+		<div class="menus">
+			<div class="menu">
+				<img class="tips" src="./img/shopping_cart/未标题-1_15.png" alt="">
+				<div class="cn_tips">
+					<a href="./index.html">首页</a>
+				</div>
+			</div>
+			<div class="menu">
+				<img class="tips" src="./img/shopping_cart/未标题-1_26.png" alt="">
+				<div class="cn_tips">
+					<a href="./preferred.html">优选</a>
+				</div>
+			</div>
+			<div class="menu">
+				<img class="tips" src="./img/shopping_cart/未标题-1_21.png" alt="">
+				<div class="cn_tips">
+					<a href="./category.html">分类</a>
+				</div>
+			</div>
+			<div class="menu">
+				<img class="tips" src="./img/shopping_cart/nav4.png" alt="">
+				<div class="cn_tips">购物车</div>
+			</div>
+			<div class="menu">
+				<img class="tips" src="./img/shopping_cart/未标题-1_25.png" alt="">
+				<div class="cn_tips">
+					<a href="./user-center.html">我的</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./js/axios.min.js"></script>
+	<script src="/js/axios.config.js"></script>
+	<script src="./js/utils.js"></script>
+
+	<script>
+		//进入页面时，获取到的购物车列表并插入
+		axios.get('/cart/list')
+			.then(function (res) {
+				console.log(res);
+				var goods = '';
+				if (res.status) {
+					//渲染数据
+					res.data.forEach(function (item) {
+						goods += `
+		<div class="bg1" data-id="${item.id}" data-goods_id="${item.goods_id}">
+			    <div class="box">
+					<input class="box1" type="checkbox"  name="select" value="" />
+                </div>
+				<div>
+					<img class="cancel" src="./img/shopping_cart/取消_03.png" alt="">
+				</div>
+				<div class="picture">
+					<img src="${item.img}" alt="">
+				</div>
+				<div class="text">
+					<div class="top">
+						<div class="introduction">${item.name}</div>
+						<div class="property">1.8M;米白色</div>
+					</div>
+					<div class="bottom">
+						<div class="price">￥<span>${item.price}</span></div>
+						<div class="number">
+							<form>
+								<button id="down" class="decrease" type="button">-</button>
+								<input id="num" class="quantity" type="number" value="${item.goods_num}">
+								<button id="up" class="increase" type="button">+</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+					`;
+					})
+					// var oTotal = document.querySelector('.text .bottom .price');
+					//获取插入位置，并插入
+					var oPart = document.querySelector('.part1');
+					oPart.insertAdjacentHTML('beforeend', goods);
+
+
+					// //点击结算，跳转页面并传数据
+					// var oSure = document.querySelector('.order .sure')
+					// var goods = []
+					// oSure.addEventListener('click', function () {
+
+					// 	//查找一下所有的复选框、定义一个新数组，每当点击结算按钮时，循环查找已经被选中的按钮
+					// 	//获取它的goods_id,装进数组中，传参到下一页面
+					// 	var oCheckbox = document.querySelectorAll('.bg1 input[type="checkbox"]');
+					// 	var goods = []
+					// 	var x = 0;
+					// 	oCheckbox.forEach(function (item) {
+
+					// 		if (item.checked) {
+					// 			// console.log(item)
+					// 			//这个地方怎么获取此商品的good_id（找）
+					// 			var goods_id = item.parentElement.parentElement.dataset.goods_id;
+					// 			// console.log(goods_id)
+					// 			goods[x] = goods_id;
+					// 			x++;
+					// 			console.log(goods)
+					// 		}
+
+					// 	});
+					// 	var oTotal = document.querySelector('.text .bottom .price');
+					// 	var oOrder = document.querySelector('.final_price_number');
+					// 	oOrder.innerHTML = total_price;
+					// 	var total_price = oTotal.innerText;
+					// 	console.log(total_price)
+
+					// 	//传参数：一个商品的id，一个商品的总价格
+					// 	// location.assign(`./create-order.html?goods=${goods}&total="${total_price}"`);
+
+					// })
+
+					//获取全选框
+					var oChkall = document.querySelector('.order input[type="checkbox"]');
+					//获取所有的复选框（刚刚进入页面时获取的，所以在删除时，对价格没有影响，所以在删除时，应该重新获取一遍复选框状态。
+					var oCheckbox = document.querySelectorAll('.bg1 input[type="checkbox"]');
+
+
+					//计算总价格的函数
+					function calculate() {
+						//每次调用函数时，先获取一遍页面上所有的复选框
+						oCheckbox = document.querySelectorAll('.bg1 input[type="checkbox"]');
+						var total_price = 0;
+						var oOrder = document.querySelector('.final_price_number')
+						oCheckbox.forEach(function (item) {
+							var checked = item.checked;
+							// console.log(item.checked);
+							// console.log(item);
+							if (checked) {
+								var price = item.parentElement.parentElement.children[3].children[1].children[0].children[0].innerHTML;
+								// console.log(price)
+
+								var account = item.parentElement.parentElement.children[3].children[1].children[1].children[0].children[1].value;
+								// console.log(account)
+
+								var total = price * account;
+								// console.log(total)
+								total_price += total;
+							}
+						});
+						// console.log(total_price)
+						oOrder.innerHTML = total_price;
+					}
+
+
+					//删除按钮
+					var oDelete = document.querySelectorAll('.cancel');
+					var oBg1 = document.querySelectorAll('.bg1')
+					// console.log(oDelete)
+					// console.log(oBg1)
+					oDelete.forEach(function (item) {
+						id = item.parentElement.parentElement.dataset.id;
+						// console.log(id)
+						item.addEventListener('click', function () {
+							axios.post('/cart/remove', { id: id })
+								.then(function (res) {
+									console.log(res)
+									if (res.status) {
+										item.parentElement.parentElement.remove();
+										calculate();
+									}
+								})
+
+						})
+					})
+
+
+					//全选框--->复选框
+					oChkall.addEventListener('click', function () {
+						oCheckbox.forEach(function (item) {
+							item.checked = oChkall.checked;
+							calculate();
+						});
+					});
+					//复选框--->全选框
+					oCheckbox.forEach(function (item) {
+						item.onclick = function () {
+							var total = 0;
+							oCheckbox.forEach(function (item) {
+								if (item.checked) {
+									total++;
+								}
+							});
+							calculate();
+							oChkall.checked = (total == oCheckbox.length);
+						}
+					});
+
+
+					//循环获取每一个复选框的状态，如果为true，获取数量和单价-相乘-放入总价格
+					oCheckbox.forEach(function (item) {
+						item.onclick = function () {
+							calculate();
+						}
+					})
+
+
+
+					// 查找元素
+					var oParent = document.querySelector(".part1");
+					// 事件委托-实现加减框、删除按钮
+					//加减框：
+					oParent.addEventListener('click', function (event) {
+						//加号
+						var add = event.target.matches("#up");
+						if (add) {
+							event.target.previousElementSibling.value++;
+							calculate();
+						}
+						//减号
+						var decrease = event.target.matches("#down");
+						if (decrease) {
+							var num = event.target.nextElementSibling.value;
+							if (num > 1) {
+								event.target.nextElementSibling.value--;
+								calculate();
+							} else {
+								return false;
+							}
+						}
+					});
+
+
+
+
+					//点击结算，跳转页面并传数据
+					var oSure = document.querySelector('.order .sure')
+					var goods = []
+					oSure.addEventListener('click', function () {
+
+						//查找一下所有的复选框、定义一个新数组，每当点击结算按钮时，循环查找已经被选中的按钮
+						//获取它的goods_id,装进数组中，传参到下一页面
+						var oCheckbox = document.querySelectorAll('.bg1 input[type="checkbox"]');
+						var goods = []
+						var x = 0;
+						oCheckbox.forEach(function (item) {
+
+							if (item.checked) {
+								// console.log(item)
+								//这个地方怎么获取此商品的good_id（找）
+								var goods_id = item.parentElement.parentElement.dataset.goods_id;
+								// console.log(goods_id)
+								goods[x] = goods_id;
+								x++;
+								console.log(goods)
+							}
+
+						});
+						var oOrder = document.querySelector('.final_price_number');
+						var total_price =oOrder.innerHTML
+						// console.log(total_price)
+
+						//传参数：一个商品的id，一个商品的总价格
+						location.assign(`./create-order.html?goods=${goods}&total="${total_price}"`);
+
+					})
+
+
+
+
+				}
+			})
+
+	</script>
+
+
+</body>
+
+</html>

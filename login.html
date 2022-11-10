@@ -1,29 +1,106 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>登入</title>
-		<meta name="viewport"
-			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="./css/reset.css">
-		<link rel="stylesheet" href="./css/login.css">
-	</head>
-	<body>
-		<img class="logo" src="./img/login/logo.png" alt="">
-		<form class="login_form" action="">
-			<input type="text" placeholder="用户名 ">
-			<input type="password" placeholder="请输入密码">
-			<button type="button">登入</button>
-		</form>
-		<div class="relative helper">
-			<a href="#">忘记密码?</a>
-			<a href="#">注册</a>
-			<div class="other_way">其他登入方式</div>
-		</div>
-		<ul class="other_ways">
-			<li><a href="#"><img src="./img/login/login_way1.png" alt=""><div>微信</div></a></li>
-			<li><a href="#"><img src="./img/login/login_way2.png" alt=""><div>QQ</div></a></li>
-			<li><a href="#"><img src="./img/login/login_way3.png" alt=""><div>微博</div></a></li>
-		</ul>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>登入</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+	<img class="logo" src="./img/login/logo.png" alt="">
+	<form class="login_form" action="">
+		<input id="username" type="text" placeholder="用户名 ">
+		<input id="password" type="password" placeholder="请输入密码">
+		<button id="login" type="button">登入</button>
+	</form>
+	<div class="relative helper">
+		<a href="#">忘记密码?</a>
+		<a href="#">注册</a>
+		<div class="other_way">其他登入方式</div>
+	</div>
+	<ul class="other_ways">
+		<li><a href="#"><img src="./img/login/login_way1.png" alt="">
+				<div>微信</div>
+			</a></li>
+		<li><a href="#"><img src="./img/login/login_way2.png" alt="">
+				<div>QQ</div>
+			</a></li>
+		<li><a href="#"><img src="./img/login/login_way3.png" alt="">
+				<div>微博</div>
+			</a></li>
+	</ul>
+	<script src="./js/axios.min.js"></script>
+	<script src="./js/axios.config.js"></script>
+
+	<script>
+		//查找元素
+		var oUsername = document.querySelector("#username");
+		var oPassword = document.querySelector("#password");
+		var oLogin = document.querySelector("#login");
+		//表单验证
+		oUsername.addEventListener('change', function () {
+			//提取value值：
+			var username = oUsername.value;
+			var isValid = /\w{3,}/.test(username);
+			if (isValid) {
+				oUsername.style.borderColor = "green";
+			} else {
+				oUsername.style.borderColor = "red";
+				alert('用户名至少三位字符！');
+			}
+			//校验标记
+			this.validate = isValid;
+		});
+		oPassword.addEventListener('change', function () {
+			//提取value值：
+			var password = oPassword.value;
+			var isValid = /\d{3,}/.test(password);
+			if (isValid) {
+				oPassword.style.borderColor = "green";
+			} else {
+				oPassword.style.borderColor = "red";
+				alert('密码至少三位数字！');
+			}
+			//校验标记
+			this.validate = isValid;
+		});
+
+		oLogin.addEventListener('click', function () {
+			//提取value
+			var username = oUsername.value;
+			var password = oPassword.value;
+			//校验所有表单
+			var all_valid = oUsername.validate && oPassword.validate;
+			if (!all_valid) {
+				alert('表单校验失败！请重新填写！')
+			}
+			//（正确） 发送AJAX：
+
+			//、初始化请求
+			axios.post("/user/login", { username, password })
+				//接收响应
+				.then(function (res) {
+					let { status, msg, data: { id, token } } = res;
+					// console.log(res);
+					//多包了一层，所以路径注意一下
+					if (status) {
+						//缓存数据
+						sessionStorage.id = id;
+						sessionStorage.token = token;
+						//登陆成功(跳转下一个页面---写相对路径！！！)
+						location.assign("./index.html");
+
+					} else {
+						//登录失败
+						alert(msg);
+					}
+				})
+		});
+	</script>
+</body>
+
 </html>

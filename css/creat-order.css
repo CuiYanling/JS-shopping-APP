@@ -1,0 +1,167 @@
+.bg {
+	/* background-color: #eeeeee; */
+	padding-bottom: 30vw;
+}
+
+.title {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 0.5vw solid #eeeeee;
+}
+
+.title img {
+	margin: 3.73vw 2.8vw;
+	width: 2.67vw;
+}
+
+.title .my-order {
+	margin: 4.12vw 0;
+	margin-right: 38vw;
+	width: 16.67vw;
+	font-size: 3.73vw;
+	color: #555555;
+}
+
+.select_address {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 2vw;
+	border-bottom: 0.5vw solid #eeeeee;
+}
+
+.address-list {
+	background-color: #eeeeee;
+	width: 95%;
+	padding-left: 4vw;
+}
+
+.address-list .null_address{
+	padding-top: 10vw;
+	height: 15vw;
+	text-align: center;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 2vw;
+}
+
+.top .name {
+	font-size: 5vw;
+}
+
+.top .tel {
+	width: 20vw;
+	margin-right: -20vw;
+}
+
+.top .default {
+	border: 0.3vw solid crimson;
+	padding: 1vw;
+	color: crimson;
+	width: 12%;
+}
+
+.bottom {
+	padding-bottom: 3vw;
+}
+
+.good1 {
+	margin: 1vw;
+	display: flex;
+	margin-top: 1vw;
+	border-bottom: 0.1vw solid #aaaaaa;
+	padding-bottom: 2vw;
+}
+
+.goods .good1 img {
+	width: 20vw;
+	margin-left: 2.87vw;
+	padding-bottom: 2vw;
+}
+
+.goods .good1 .detail-introduce {
+	width: 100%;
+}
+
+.goods .good1 .introduce {
+	/* font-size: 3.47vw; */
+	color: #333333;
+	padding: 2vw;
+}
+
+.goods .good1 .specification .capacity {
+	padding-left: 2vw;
+	font-size: 4vw;
+	color: #aaaaaa;
+}
+
+.goods .good1 .specification .goods-num {
+	margin-left: 5vw;
+	font-size: 4vw;
+	color: #999999;
+}
+
+.goods .good1 .price {
+	padding-left: 2vw;
+	padding-right: 4.2vw;
+	padding-top: 2vw;
+	font-size: 4vw;
+	color: #666666;
+}
+
+.service {
+	width: 95%;
+	padding-left: 2vw;
+}
+
+.service .flex {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 0.1vw solid #aaaaaa;
+	padding: 3vw;
+}
+
+.flex .remark {
+	width: 15%;
+}
+
+.flex .input {
+	border: none;
+	width: 80%;
+}
+
+.bottom_fixed {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+}
+
+.total_bottom {
+	display: flex;
+	justify-content: space-between;
+}
+
+.total_bottom .total_price {
+	background-color: white;
+	width: 60%;
+	height: 10vw;
+	padding-left: 5vw;
+	padding-top: 3vw;
+	color: firebrick;
+	font-size: 5vw;
+}
+
+.total_bottom .total_buy {
+	background-color: firebrick;
+	width: 40%;
+	text-align: center;
+	padding-top: 3vw;
+	color: white;
+	font-size: 5vw;
+	height: 10vw;
+}

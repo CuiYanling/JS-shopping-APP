@@ -1,0 +1,230 @@
+.bg {
+	padding-bottom: 50vw;
+	background-color: #fbfbfb;
+}
+
+.part1 .title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 4.67vw;
+	padding-bottom: 3.47vw;
+}
+
+.part1 .shopping_cart {
+	width: 14.8vw;
+	height: 4.67vw;
+	font-size: 4.8vw;
+	/* 文字加粗 */
+	font-weight: bold;
+	color: #333333;
+}
+
+.part1 .bg1 {
+	margin-bottom: 2.8vw;
+	background-color: white;
+	display: flex;
+	position: relative;
+}
+
+.part1 .bg1 .box1 {
+	position: absolute;
+	top: 12.27vw;
+	left: 3.47vw;
+}
+
+.part1 .bg1 .cancel {
+	position: absolute;
+	top: 2.8vw;
+	right: 2.53vw;
+	width: 2.67vw;
+	height: 2.67vw;
+}
+
+.part1 .bg1 img {
+	width: 22.4vw;
+	height: 22.4vw;
+	margin-top: 2.39vw;
+	margin-left: 11.87vw;
+}
+
+.part1 .bg1 .text {
+	margin-left: 3.33vw;
+}
+
+.part1 .bg1 .introduction {
+	font-size: 3.47vw;
+	font-weight: bold;
+	margin-top: 4vw;
+}
+
+.part1 .bg1 .property {
+	font-size: 3.2vw;
+	margin-top: 2.27vw;
+}
+
+.part1 .bg1 .bottom {
+	display: flex;
+}
+
+.part1 .bg1 .price {
+	font-size: 3.47vw;
+	margin-top: 5vw;
+	color: #555555;
+}
+
+.part1 .bg1 .number {
+	margin-top: 3vw;
+	margin-left: 10.8vw;
+}
+
+.part1 .bg1 .quantity {
+	width: 10.93vw;
+	height: 7.07vw;
+}
+
+.part1 .bg1 .decrease {
+	width: 6.93vw;
+	height: 7.07vw;
+}
+
+.part1 .bg1 .increase {
+	width: 6.93vw;
+	height: 7.07vw;
+}
+
+.part2 .title {
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.part2 .box {
+	background-color: white;
+}
+
+.part2 .like {
+	width: 15.6vw;
+	height: 3.6vw;
+	font-size: 3.73vw;
+	font-weight: bold;
+	padding-top: 4.8vw;
+	padding-bottom: 3.7vw;
+}
+
+
+.part2 .box {
+	/* display: flex; */
+}
+
+.part2 .box1 {
+	display: inline-block;
+	margin-left: 2.2vw;
+	margin-bottom: 5.47vw;
+}
+
+.part2 .green_bed {
+	width: 45.87vw;
+	height: 46.67vw;
+}
+
+.part2 .pink_box {
+	width: 45.87vw;
+	height: 46.67vw;
+}
+
+.part2 .blue_box {
+	width: 45.87vw;
+	height: 46.67vw;
+}
+
+.part2 .gold_box {
+	width: 45.87vw;
+	height: 46.67vw;
+}
+
+.part2 .introduction {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #333333;
+	margin-top: 2.8vw;
+	margin-bottom: 2.53vw;
+}
+
+.part2 .price {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #c55a5c;
+}
+
+.order{
+	position: fixed;
+	bottom: 15vw;
+	background-color:  #fbfbfb;
+}
+.order .select {
+	position: relative;
+	display: inline-flex;
+}
+.order .option {
+	width: 70vw;
+	padding: 4.67vw 0;
+	/* border: 1px solid red; */
+}
+.order .box{
+	position: absolute;
+	bottom: 4vw;
+	left: 3.07vw;
+}
+.order .all_option {
+	position: absolute;
+	bottom: 3vw;
+	left: 11.87vw;
+	font-size: 3.73vw;
+	font-weight: bold;
+}
+
+.order .final_price {
+	position: absolute;
+	bottom: 3vw;
+	right: 2.67vw;
+}
+
+.order .sure {
+	width: 28vw;
+	background-color: #c55a5c;
+	color: #ffffff;
+	text-align: center;
+	display: inline-block;
+	font-size: 3.73vw;
+    padding: 4.67vw 0;
+}
+
+
+.bottom1 {
+	background-color: white;
+}
+
+.bottom1 .menus {
+	background-color: #fbfbfb;
+	width: 100%;
+	display: flex;
+	bottom:0; 
+	position: fixed;
+}
+
+.bottom1 .menu {
+	margin: 3.3vw 6.3vw;
+}
+
+.bottom1 .tips {
+	width: 4.8vw;
+	height: 4.8vw;
+}
+
+.bottom1 .cn_tips {
+	font-size: 2.4vw;
+	font-weight: bold;
+	color: #555555;
+}

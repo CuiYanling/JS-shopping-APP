@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>分类</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/category.css">
+</head>
+
+<body>
+	<header>
+		<div class="search-box">
+			<a href="./search.html" class="search-input">
+				<input type="text" placeholder="搜索商品，共10000款好物">
+			</a>
+		</div>
+	</header>
+	<div class="content">
+		<div class="left">
+			<ul class="category_list">
+			</ul>
+		</div>
+		<div class="right">
+			<div class="banner">
+				<a href="#">
+					<img src="./img/category/banner.jpg" alt="">
+				</a>
+			</div>
+			<div class="title">女士分类</div>
+			<ul class="sub_list">
+				<!-- <li class="item">
+					<a href="#">
+						<img src="./img/category/category1.jpg" alt="">
+						<div class="name">衬衫</div>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+	</div>
+	<nav>
+		<ul class="nav">
+			<li>
+				<a href="./index.html">
+					<img src="./img/category/nav1.png" alt="">
+					<div class="name">
+						<a href="./index.html">首页</a>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="./preferred.html">
+					<img src="./img/category/nav2.png" alt="">
+					<div class="name">
+						<a href="./preferred.html">优选</a>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<img src="./img/category/nav3s.png" alt="">
+					<div class="name">分类</div>
+				</a>
+			</li>
+			<li>
+				<a href="./cart.html">
+					<img src="./img/category/nav4.png" alt="">
+					<div class="name">
+						<a href="./shopping_cart.html">购物车</a>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="./user_center.html">
+					<img src="./img/category/nav5.png" alt="">
+					<div class="name">
+						<a href="./user-center.html">我的</a>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<script src="./js/axios.min.js"></script>
+	<script src="./js/axios.config.js"></script>
+	<script>
+		// 查找元素
+		var oCategoryList = document.querySelector('.category_list');
+		var oTitle = document.querySelector('.title');
+		var oSubList = document.querySelector('.sub_list');
+		// 获取一级分类，需要传参 pId: 1
+		axios.get("/category/sub", { params: { pId: 1 } })
+			.then(function (res) {
+				if (res.status) {
+					//获取成功，渲染到列表的左侧
+					var cate_1st = "";
+					//获取到之后，默认将列表第一个展示出来（index === 0），
+					//并将字体style置为红色（通过foreach属性中的index判断）
+					//埋一个自定义data，生成一个pid，为下文生成子分类做准备
+					res.data.forEach(function (item, index) {
+						cate_1st += `
+	       <li data-pid="${item.id}" 
+		   class="${index === 0 ? 'item relative selected' : 'item relative'}">${item.name}</li>
+	        `;
+						//插入
+						oCategoryList.innerHTML = cate_1st;
+					});
+					// 加载二级分类（调用函数）
+					loadSubCate(res.data[0].id, res.data[0].name);
+				} else {
+					alert(res.msg);
+				}
+			})
+		// 获取子级分类（封装一个函数）
+		function loadSubCate(pId, cate_1st_name) {
+			axios.get("/category/sub", { params: { pId: pId } })
+				.then(function (res) {
+					if (res.status) {
+						oTitle.innerText = `${cate_1st_name}分类`;
+						var cate_2nd = "";
+						if (res.data.length === 0) {
+							cate_2nd = "<li class='null'>暂无数据</li>";
+						}
+						res.data.forEach(function (item) {
+							cate_2nd += `
+							<li class="item">
+								<a href="./good-list.html?id=${item.id}&level=2">
+									<img src="${item.img}" alt="">
+									<div class="name">${item.name}</div>
+								</a>
+							</li>`;
+						});
+						oSubList.innerHTML = cate_2nd;
+					} else {
+						alert(res.msg);
+					}
+				})
+		}
+		//左侧栏点击事件
+		oCategoryList.addEventListener("click", function (e) {
+			if (e.target.matches("li")) {
+				console.log(e.target)
+				// 获取一级分类id,name(每个一级分类对应的子分类id不同（上文自定义生成的id)
+				var pid = e.target.dataset.pid;
+				var name = e.target.innerText;
+				// console.log(pid)
+				//切换选中状态
+				this.querySelectorAll("li").forEach(function (item) {
+					item.classList.remove("selected");
+				})
+				e.target.classList.add("selected");
+				//请求子分类
+				loadSubCate(pid, name);
+			}
+		});
+	</script>
+
+
+</body>
+
+</html>

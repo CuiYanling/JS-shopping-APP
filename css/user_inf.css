@@ -77,6 +77,16 @@ header {
 	color: #333;
 	outline: none;
 }
+
+.inf_form input[type="number"] {
+	border: none;
+	text-align: right;
+	font-family: MicrosoftYaHeiUILight;
+	font-size: 3.73vw;
+	color: #333;
+	outline: none;
+}
+
 .inf_form input[type="radio"]{
 	margin-right:3.07vw ;
 	vertical-align: middle;

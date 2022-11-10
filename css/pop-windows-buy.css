@@ -1,0 +1,114 @@
+.window_buy-position{
+	background-color: #ffffff;
+	padding-bottom: 2vw;
+	width: 100%;
+	position: fixed;
+	bottom: 13vw;
+	right: 0;
+	display: none;
+	z-index: 2;
+}
+
+.flex {
+	display: flex;
+	position: relative;
+}
+
+.flex img {
+	width: 24vw;
+	height: 24.13vw;
+	margin: 5vw;
+}
+
+.flex .introduce {
+	position: absolute;
+	bottom: 6vw;
+	left: 33vw;
+}
+
+.flex .introduce .price {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #c55a5c;
+}
+
+.flex .introduce .select {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #555555;
+	margin-top: -6vw;
+	margin-left: -13vw;
+}
+
+.flex .btn_buy {
+	width: 5.07vw;
+	height: 5.47vw;
+	position: absolute;
+	right: 5vw;
+	top: 5vw;
+}
+
+.color {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #555555;
+	padding-left: 5vw;
+}
+
+.color-flex {
+	display: flex;
+}
+
+.colors {
+	width: 15.87vw;
+	padding: 2vw;
+	border-radius: 1.07vw;
+	border: solid 0.27vw #d1d1d1;
+	text-align: center;
+	margin: 4vw;
+}
+
+.size {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #555555;
+	padding-left: 5vw;
+}
+
+.size-flex {
+	display: flex;
+}
+
+.sizes {
+	width: 15.87vw;
+	padding: 2vw;
+	border-radius: 1.07vw;
+	border: solid 0.27vw #d1d1d1;
+	text-align: center;
+	margin: 4vw;
+}
+
+.num {
+	font-size: 3.47vw;
+	font-weight: bold;
+	color: #555555;
+	padding-left: 5vw;
+}
+
+form {
+	margin: 5vw;
+
+}
+
+form input {
+	width: 10vw;
+}
+
+.button {
+	width: 93.87vw;
+	height: 9.2vw;
+	background-color: #c55a5c;
+	border-radius: 1.07vw;
+	margin-left: 3vw;
+	color: white;
+}

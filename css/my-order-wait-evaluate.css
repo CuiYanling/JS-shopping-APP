@@ -1,0 +1,310 @@
+.bg {
+	background-color: #eeeeee;
+	padding-bottom: 50vw;
+}
+
+.title {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 0.5vw solid #eeeeee;
+}
+
+.title img {
+	margin: 3.73vw 2.8vw;
+	width: 2.67vw;
+}
+
+.title .my-order {
+	margin: 4.12vw 0;
+	margin-right: 38vw;
+	width: 16.67vw;
+	font-size: 3.73vw;
+	color: #555555;
+}
+
+.menus {
+	padding-top: 2.67vw;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-around;
+}
+
+.menus .wait-pill {
+	padding-bottom: 2vw;
+	border-bottom: solid 0.5vw #c55a5c;
+}
+
+.goods-1 {
+	margin-top: 4vw;
+	background-color: #ffffff;
+	border: 0.5vw solid #eeeeee;
+	width: 95%;
+	margin-left: 2vw;
+}
+
+.goods-1 .wait-pill {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 0.2vw solid #eeeeee;
+	/* width: 95%; */
+}
+
+.goods-1 .wait {
+	padding: 2.8vw 0;
+	padding-left: 2.9vw;
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+.goods-1 .time {
+	font-size: 2.84vw;
+	color: #999999;
+	padding: 3.2vw 0;
+	padding-right: 3.73vw;
+}
+
+.goods-1 .goods-detail {
+	padding-top: 3.2vw;
+	display: flex;
+	border-bottom: 0.2vw solid #eeeeee;
+}
+
+.goods-1 .goods-detail img {
+	width: 22.27vw;
+	margin-left: 2.87vw;
+	padding-bottom: 2vw;
+
+}
+
+.goods-1 .goods-detail .introduce {
+	font-size: 3.47vw;
+	color: #333333;
+	padding-left: 3.2vw;
+	padding-bottom: 3.47vw;
+}
+
+.goods-1 .goods-detail .specification {
+	display: flex;
+	justify-content: space-between;
+}
+
+.goods-1 .goods-detail .specification .capacity {
+	padding-left: 3.2vw;
+	font-size: 3.2vw;
+	color: #aaaaaa;
+}
+
+.goods-1 .goods-detail .specification .price {
+	padding-right: 4.27vw;
+	font-size: 3.2vw;
+	color: #666666;
+}
+
+.goods-1 .goods-detail .goods-num {
+	width: 5vw;
+	font-size: 2.8vw;
+	color: #999999;
+	margin-left: 60vw;
+	padding-top: 3.47vw;
+}
+
+.goods-1 .total {
+	display: flex;
+	margin: 2vw 0;
+}
+
+.goods-1 .total .total-goods {
+	width: 21vw;
+	padding-left: 40vw;
+}
+
+.goods-1 .total .total-goods .goods {
+	font-size: 3.2vw;
+	color: #383636;
+}
+
+.goods-1 .total .total-goods .number {
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+
+.goods-1 .total .total-price {
+	width: 30vw;
+	margin-left: 5vw;
+}
+
+.goods-1 .total .total-price .final-total {
+	font-size: 3.2vw;
+	color: #383636;
+}
+
+.goods-1 .total .total-price .final-price {
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+.goods-1 .selection {
+	display: flex;
+	margin: 2vw 0;
+}
+
+.goods-1 .selection .cancel-order {
+	margin: 2vw;
+	width: 20.8vw;
+	height: 6vw;
+	border-radius: 2.93vw;
+	border: solid 0.2vw #aaaaaa;
+	text-align: center;
+	margin-left: 50vw;
+}
+
+.goods-1 .selection .pill {
+	margin: 2vw;
+	width: 20.8vw;
+	height: 6vw;
+	border-radius: 2.93vw;
+	border: solid 0.2vw #c55a5c;
+	text-align: center;
+	color: #c55a5c;
+}
+
+.goods-2 {
+	margin-top: 4vw;
+	background-color: #ffffff;
+	border: 0.5vw solid #eeeeee;
+	width: 95%;
+	margin-left: 2vw;
+}
+
+.goods-2 .wait-pill {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 0.2vw solid #eeeeee;
+	/* width: 95%; */
+}
+
+.goods-2 .wait {
+	padding: 2.8vw 0;
+	padding-left: 2.9vw;
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+.goods-2 .time {
+	font-size: 2.84vw;
+	color: #999999;
+	padding: 3.2vw 0;
+	padding-right: 3.73vw;
+}
+
+.goods-2 .goods-detail {
+	padding-top: 3.2vw;
+	display: flex;
+	border-bottom: 0.2vw solid #eeeeee;
+}
+
+.goods-2 .goods-detail img {
+	width: 22.27vw;
+	margin-left: 2.87vw;
+	padding-bottom: 2vw;
+
+}
+
+.goods-2 .detail-introduce {
+	width: 100%;
+}
+
+.goods-2 .goods-detail .introduce {
+	font-size: 3.47vw;
+	color: #333333;
+	padding-left: 3.2vw;
+	padding-bottom: 3.47vw;
+}
+
+.goods-2 .goods-detail .specification {
+	display: flex;
+	justify-content: space-between;
+}
+
+.goods-2 .goods-detail .specification .capacity {
+	padding-left: 3.2vw;
+	font-size: 3.2vw;
+	color: #aaaaaa;
+}
+
+.goods-2 .goods-detail .specification .price {
+	padding-right: 4.2vw;
+	font-size: 3.2vw;
+	color: #666666;
+}
+
+.goods-2 .goods-detail .goods-num {
+	width: 5vw;
+	font-size: 2.8vw;
+	color: #999999;
+	margin-left: 60vw;
+	padding-top: 3.47vw;
+}
+
+.goods-2 .total {
+	display: flex;
+	margin: 2vw 0;
+}
+
+.goods-2 .total .total-goods {
+	width: 21vw;
+	padding-left: 40vw;
+}
+
+.goods-2 .total .total-goods .goods {
+	font-size: 3.2vw;
+	color: #383636;
+}
+
+.goods-2 .total .total-goods .number {
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+
+.goods-2 .total .total-price {
+	width: 30vw;
+	margin-left: 5vw;
+}
+
+.goods-2 .total .total-price .final-total {
+	font-size: 3.2vw;
+	color: #383636;
+}
+
+.goods-2 .total .total-price .final-price {
+	font-size: 3.2vw;
+	color: #c55a5c;
+}
+
+.goods-2 .selection {
+	display: flex;
+	margin: 2vw 0;
+}
+
+.goods-2 .selection .cancel-order {
+	margin: 2vw;
+	width: 20.8vw;
+	height: 6vw;
+	border-radius: 2.93vw;
+	border: solid 0.2vw #aaaaaa;
+	text-align: center;
+	margin-left: 50vw;
+}
+
+.goods-2 .selection .pill {
+	margin: 2vw;
+	width: 20.8vw;
+	height: 6vw;
+	border-radius: 2.93vw;
+	border: solid 0.2vw #c55a5c;
+	text-align: center;
+	color: #c55a5c;
+}

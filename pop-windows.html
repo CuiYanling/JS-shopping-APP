@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/pop-windows.css">
+		<title>windows</title>
+	</head>
+	<body>
+		<div class="flex">
+			<div>
+				<img src="./img/pop-windows/windows_03.jpg" alt="">
+			</div>
+			<div class="introduce">
+				<div class="price">价格：￥599</div>
+				<div class="select">请选择规格属性</div>
+			</div>
+			<button class="btn" type="button">×</button>
+		</div>
+		<div class="color">颜色</div>
+		<div class="color-flex">
+			<div class="colors">灰紫</div>
+			<div class="colors">浅咖色</div>
+		</div>
+		<div class="size">尺寸</div>
+		<div class="size-flex">
+			<div class="sizes">1.2M</div>
+			<div class="sizes">1.8M</div>
+		</div>
+		<div class="num">数量</div>
+		<form>
+			<button id="up" class="decrease" type="button">+</button>
+			<input id="num" class="quantity" type="text" value="1">
+			<button id="down" class="increase" type="button">-</button>
+		</form>
+		<script>
+			// 查找元素
+			var oUp = document.getElementById('up');
+			var oDown = document.getElementById('down');
+			var oNum = document.getElementById('num');
+
+			// 绑定事件
+			// 增加
+			oUp.onclick = function() {
+				// 提取value值 并去除两头空格 .trim(), 此时是字符串，字符串不能正常运算
+				var num = oNum.value.trim();
+
+				// 转换成数字，正常运算
+				var x = parseFloat(num);
+
+				// 进行校验
+				if (isNaN(x) === true) {
+					alert("请重新输入数字！");
+					// 阻止执行下面的代码
+					return false;
+				}
+				// 只能加到99
+				if (x >= 99) {
+					return false;
+				}
+				// 修改value：
+				oNum.value = x + 1;
+			}
+
+			// 减号
+			oDown.onclick = function() {
+				// 提取value值 并去除两头空格 .trim(), 此时是字符串，字符串不能正常运算
+				var num = oNum.value.trim();
+
+				// 转换成数字，正常运算
+				var x = parseFloat(num);
+
+				// 进行校验
+				if (isNaN(x) === true) {
+					alert("请重新输入数字！");
+					// 阻止执行下面的代码
+					return false;
+				}
+				// 只能减到1
+				if (x <= 1) {
+					return false;
+				}
+				// 修改value：
+				oNum.value = x - 1;
+			}
+		</script>
+		<button class="button" type="button">确认</button>
+	</body>
+</html>

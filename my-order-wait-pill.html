@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/my-order-wait-pill.css">
+	<title>order-drop-shipping</title>
+</head>
+
+<body>
+
+	<div class="title">
+		<div>
+			<a href="#">
+				<img onclick="history.back()" src="./img/my-order-wait-pill/1_03.jpg" alt="">
+			</a>
+		</div>
+		<div class="my-order">我的订单</div>
+	</div>
+	<div class="menus">
+		<div class="wait-pill">待付款</div>
+		<div class="wait-drop">待发货</div>
+		<div class="wait-receive">待收货</div>
+		<div class="wait-evaluate">待评价</div>
+		<div class="wait-complete">已完成</div>
+	</div>
+	<div class="bg">
+		<!-- <div class="goods-1">
+			<div class="wait-pill">
+				<div class="wait">等待买家付款</div>
+				<div class="time">2020-07-15 10:25:30</div>
+			</div>
+			<div class="goods-detail">
+				<div class="goods-pic">
+					<a href="#">
+						<img src="./img/my-order-wait-pill/1_06.jpg" alt="">
+					</a>
+				</div>
+				<div>
+					<div class="introduce">高端GNF不锈钢脚踏垃圾桶家用40L大容量30L厨房25L客厅8L有盖...</div>
+					<div class="specification">
+						<div class="capacity">容量30L</div>
+						<div class="price">￥520</div>
+					</div>
+					<div class="goods-num">×1</div>
+				</div>
+			</div>
+			<div class="total">
+				<div class="total-goods">
+					<span class="goods">共</span>
+					<span class="number">1</span>
+					<span class="goods">件商品</span>
+				</div>
+				<div class="total-price">
+					<span class="final-total">合计：</span>
+					<span class="final-price">￥520.00</span>
+				</div>
+			</div>
+			<div class="selection">
+				<div class="cancel-order">取消订单</div>
+				<div class="pill">立即付款</div>
+			</div>
+		</div> -->
+		<!-- <div class="goods-2">
+			<div class="wait-pill">
+				<div class="wait">等待买家付款</div>
+				<div class="time">2020-07-15 10:25:30</div>
+			</div>
+
+			<div class="goods-detail">
+				<div class="goods-pic">
+					<a href="#">
+						<img src="./img/my-order-wait-pill/1_10.jpg" alt="">
+					</a>
+				</div>
+				<div class="detail-introduce">
+					<div class="introduce">秋季新款白色运动鞋</div>
+					<div class="specification">
+						<div class="capacity">白色</div>
+						<div class="price">￥160</div>
+					</div>
+					<div class="goods-num">×1</div>
+				</div>
+			</div>
+
+			<div class="goods-detail">
+				<div class="goods-pic">
+					<a href="#">
+						<img src="./img/my-order-wait-pill/1_06.jpg" alt="">
+					</a>
+				</div>
+				<div class="detail-introduce">
+					<div class="introduce">高端GNF不锈钢脚踏垃圾桶家用40L大容量30L厨房25L客厅8L有盖...</div>
+					<div class="specification">
+						<div class="capacity">容量30L</div>
+						<div class="price">￥520</div>
+					</div>
+					<div class="goods-num">×1</div>
+				</div>
+			</div>
+			<div class="total">
+				<div class="total-goods">
+					<span class="goods">共</span>
+					<span class="number">2</span>
+					<span class="goods">件商品</span>
+				</div>
+				<div class="total-price">
+					<span class="final-total">合计：</span>
+					<span class="final-price">￥680.00</span>
+				</div>
+			</div>
+			<div class="selection">
+				<div class="cancel-order">取消订单</div>
+				<div class="pill">立即付款</div>
+			</div>
+		</div> -->
+	</div>
+
+
+	<script src="./js/axios.min.js"></script>
+	<script src="/js/axios.config.js"></script>
+	<script src="./js/utils.js"></script>
+
+	<script>
+		var oGood = document.querySelector('.bg');
+		var oPill = document.querySelector('.wait-pill');
+		var oDrop = document.querySelector('.wait-drop');
+		var oReceive = document.querySelector('.wait-receive');
+		var oEvaluate = document.querySelector('.wait-evaluate');
+
+		//根据浏览器中传过来的status来调用axios,生成不同的状态
+		var status = params('status');
+		console.log(status);
+
+		if (status == 0) {
+			oPill.style.paddingBottom = '2vw';
+			oPill.style.borderBottom = 'solid 0.5vw #c55a5c';
+			axios.get('/order/list', { params: { status: 0 } })
+				.then(function (res) {
+					console.log(res);
+					var good1 = '';
+					var good2 = '';
+					var good3 = '';
+					if (res.status) {
+						res.data.forEach(function (item) {
+							good2 = '';
+							good3 = '';
+							// console.log(item);
+							//如果一个待付款订单中有一件商品
+							good1 = `
+		<div class="goods-1">
+	    	<div class="wait-pill">
+				<div class="wait">${item.status}</div>
+				<div class="time">${item.create_time}</div>
+			</div>
+		</div>	
+			`;
+							//插入商品头部
+							oGood.insertAdjacentHTML("afterbegin", good1);
+							//查找刚刚生成的头部的位置
+							var oGoods1 = document.querySelector('.goods-1');
+
+							//循环商品并生成
+							var length = item.goodsList.length;
+							console.log(length)
+							item.goodsList.forEach(function (item) {
+								// console.log(item)
+								good2 += `
+			<div class="goods-detail">
+				<div class="goods-pic">
+					<a href="#">
+						<img src="${item.img_md}" alt="">
+					</a>
+				</div>
+				<div>
+					<div class="introduce">${item.name}</div>
+					<div class="specification">
+						<div class="capacity">容量30L</div>
+						<div class="price">￥${item.goods_price}</div>
+					</div>
+					<div class="goods-num">×${item.goods_num}</div>
+				</div>
+			</div>
+								`;
+							})
+
+							//生成底部
+							good3 = `
+			<div class="total">
+			 	<div class="total-goods">
+					<span class="goods">共</span>
+					<span class="number">${length}</span>
+					<span class="goods">件商品</span>
+				</div>
+				<div class="total-price">
+					<span class="final-total">合计：</span>
+					<span class="final-price">￥${item.payment}</span>
+				</div>
+			</div>
+			<div class="selection">
+				<div class="cancel-order">取消订单</div>
+				<div class="pill">立即付款</div>
+			</div>
+							`;
+							var good4 = good2 + good3
+							oGoods1.insertAdjacentHTML('beforeend', good4);
+						})
+					}
+				})
+		}
+
+		if (status == 3) {
+			oDrop.style.paddingBottom = '2vw';
+			oDrop.style.borderBottom = 'solid 0.5vw #c55a5c';
+			axios.get('/order/list', { params: { status: 3 } })
+				.then(function (res) {
+					console.log(res);
+					var good1 = '';
+					var good2 = '';
+					var good3 = '';
+					if (res.status) {
+
+						res.data.forEach(function (item) {
+							good2 = '';
+							good3 = '';
+							// console.log(item);
+							//如果一个待付款订单中有一件商品
+							good1 = `
+<div class="goods-1">
+<div class="wait-pill">
+	<div class="wait">${item.status}</div>
+	<div class="time">${item.create_time}</div>
+</div>
+</div>	
+`;
+							//插入商品头部
+							oGood.insertAdjacentHTML("afterbegin", good1);
+							//查找刚刚生成的头部的位置
+							var oGoods1 = document.querySelector('.goods-1');
+
+
+							//循环商品并生成
+							var length = item.goodsList.length;
+							console.log(length)
+							item.goodsList.forEach(function (item) {
+								// console.log(item)
+								good2 += `
+<div class="goods-detail">
+	<div class="goods-pic">
+		<a href="#">
+			<img src="${item.img_md}" alt="">
+		</a>
+	</div>
+	<div>
+		<div class="introduce">${item.name}</div>
+		<div class="specification">
+			<div class="capacity">容量30L</div>
+			<div class="price">￥${item.goods_price}</div>
+		</div>
+		<div class="goods-num">×${item.goods_num}</div>
+	</div>
+</div>
+					`;
+							})
+
+							//插入商品
+							// oGoods1.insertAdjacentHTML('beforeend', good2);
+
+
+							//生成底部
+							good3 = `
+<div class="total">
+	 <div class="total-goods">
+		<span class="goods">共</span>
+		<span class="number">${length}</span>
+		<span class="goods">件商品</span>
+	</div>
+	<div class="total-price">
+		<span class="final-total">合计：</span>
+		<span class="final-price">￥${item.payment}</span>
+	</div>
+</div>
+<div class="selection">
+	<div class="cancel-order">催发货</div>
+	<div class="pill">修改地址</div>
+</div>
+				`;
+							var good4 = good2 + good3
+							oGoods1.insertAdjacentHTML('beforeend', good4);
+
+						})
+
+					}
+				})
+		}
+
+		if (status == 4) {
+			oReceive.style.paddingBottom = '2vw';
+			oReceive.style.borderBottom = 'solid 0.5vw #c55a5c';
+			axios.get('/order/list', { params: { status: 4 } })
+				.then(function (res) {
+					console.log(res);
+					var good1 = '';
+					var good2 = '';
+					var good3 = '';
+					if (res.status) {
+
+						res.data.forEach(function (item) {
+							good2 = '';
+							good3 = '';
+							// console.log(item);
+							//如果一个待付款订单中有一件商品
+							good1 = `
+<div class="goods-1">
+<div class="wait-pill">
+	<div class="wait">${item.status}</div>
+	<div class="time">${item.create_time}</div>
+</div>
+</div>	
+`;
+							//插入商品头部
+							oGood.insertAdjacentHTML("afterbegin", good1);
+							//查找刚刚生成的头部的位置
+							var oGoods1 = document.querySelector('.goods-1');
+
+
+							//循环商品并生成
+							var length = item.goodsList.length;
+							console.log(length)
+							item.goodsList.forEach(function (item) {
+								// console.log(item)
+								good2 += `
+<div class="goods-detail">
+	<div class="goods-pic">
+		<a href="#">
+			<img src="${item.img_md}" alt="">
+		</a>
+	</div>
+	<div>
+		<div class="introduce">${item.name}</div>
+		<div class="specification">
+			<div class="capacity">容量30L</div>
+			<div class="price">￥${item.goods_price}</div>
+		</div>
+		<div class="goods-num">×${item.goods_num}</div>
+	</div>
+</div>
+					`;
+							})
+
+							//插入商品
+							// oGoods1.insertAdjacentHTML('beforeend', good2);
+
+
+							//生成底部
+							good3 = `
+<div class="total">
+	 <div class="total-goods">
+		<span class="goods">共</span>
+		<span class="number">${length}</span>
+		<span class="goods">件商品</span>
+	</div>
+	<div class="total-price">
+		<span class="final-total">合计：</span>
+		<span class="final-price">￥${item.payment}</span>
+	</div>
+</div>
+<div class="selection">
+	<div class="cancel-order">查看物流</div>
+	<div class="pill">确认收货</div>
+</div>
+				`;
+							var good4 = good2 + good3
+							oGoods1.insertAdjacentHTML('beforeend', good4);
+
+						})
+
+					}
+				})
+		}
+
+		if (status == 5) {
+			oEvaluate.style.paddingBottom = '2vw';
+			oEvaluate.style.borderBottom = 'solid 0.5vw #c55a5c';
+			axios.get('/order/list', { params: { status: 5 } })
+				.then(function (res) {
+					console.log(res);
+					var good1 = '';
+					var good2 = '';
+					var good3 = '';
+					if (res.status) {
+
+						res.data.forEach(function (item) {
+							good2 = '';
+							good3 = '';
+							// console.log(item);
+							//如果一个待付款订单中有一件商品
+							good1 = `
+<div class="goods-1">
+<div class="wait-pill">
+	<div class="wait">${item.status}</div>
+	<div class="time">${item.create_time}</div>
+</div>
+</div>	
+`;
+							//插入商品头部
+							oGood.insertAdjacentHTML("afterbegin", good1);
+							//查找刚刚生成的头部的位置
+							var oGoods1 = document.querySelector('.goods-1');
+
+
+							//循环商品并生成
+							var length = item.goodsList.length;
+							console.log(length)
+							item.goodsList.forEach(function (item) {
+								// console.log(item)
+								good2 += `
+<div class="goods-detail">
+	<div class="goods-pic">
+		<a href="#">
+			<img src="${item.img_md}" alt="">
+		</a>
+	</div>
+	<div>
+		<div class="introduce">${item.name}</div>
+		<div class="specification">
+			<div class="capacity">容量30L</div>
+			<div class="price">￥${item.goods_price}</div>
+		</div>
+		<div class="goods-num">×${item.goods_num}</div>
+	</div>
+</div>
+					`;
+							})
+
+							//插入商品
+							// oGoods1.insertAdjacentHTML('beforeend', good2);
+
+
+							//生成底部
+							good3 = `
+<div class="total">
+	 <div class="total-goods">
+		<span class="goods">共</span>
+		<span class="number">${length}</span>
+		<span class="goods">件商品</span>
+	</div>
+	<div class="total-price">
+		<span class="final-total">合计：</span>
+		<span class="final-price">￥${item.payment}</span>
+	</div>
+</div>
+<div class="selection">
+	<div class="cancel-order">取消</div>
+	<div class="pill">立即评价</div>
+</div>
+				`;
+							var good4 = good2 + good3
+							oGoods1.insertAdjacentHTML('beforeend', good4);
+
+						})
+
+					}
+				})
+		}
+
+	</script>
+
+
+	<script>
+		//在本页面上，点击获取页面
+		oPill.addEventListener('click', function () {
+			location.assign(`./my-order-wait-pill.html?status=${0}`);
+		});
+
+		oDrop.addEventListener('click', function () {
+			location.assign(`./my-order-wait-pill.html?status=${3}`);
+		});
+
+		oReceive.addEventListener('click', function () {
+			location.assign(`./my-order-wait-pill.html?status=${4}`);
+		});
+
+		oEvaluate.addEventListener('click', function () {
+			location.assign(`./my-order-wait-pill.html?status=${5}`);
+		});
+	</script>
+
+</body>
+
+</html>

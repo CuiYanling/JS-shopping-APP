@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/creat-order.css">
+	<title>生成订单</title>
+</head>
+
+<body>
+	<div class="bg">
+		<div class="title">
+			<div>
+				<a href="#">
+					<img onclick="history.back()" src="./img/create-order/detail-page (6).jpg" alt="">
+				</a>
+			</div>
+			<div class="my-order">确认订单</div>
+		</div>
+		<div class="select_address">
+			<div>寄送至</div>
+			<div>
+				<img src="./img/create-order/08-1设置_07.jpg" alt="">
+			</div>
+
+		</div>
+		<div class="address-list">
+			<!-- <div class="top flex">
+				<div class="name">崔</div>
+				<div class="tel">12345678910</div>
+				<div class="default">默认</div>
+			</div>
+			<div class="bottom">
+				<div class="adress">地址地址地址地址地址地址地址</div>
+			</div> -->
+
+			<!-- <div class="null_address">无收货地址，请选择或新建收货地址</div> -->
+
+		</div>
+
+		<div class="goods">
+
+		</div>
+
+		<div class="service">
+			<div class="flex">
+				<div>商品合计</div>
+				<div class="total_price">￥<span class="total_price_num">160</span></div>
+			</div>
+			<div class="flex">
+				<div>运费</div>
+				<div>￥<span>6</span></div>
+			</div>
+			<div class="flex">
+				<div>优惠券：未选择</div>
+				<div><span>0</span>张</div>
+			</div>
+			<div class="flex">
+				<div class="remark">备注:</div>
+				<input class="input" type="text" placeholder="备注留言">
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="bottom_fixed">
+		<div class="total_bottom flex">
+			<div class="total_price">
+				<span class="total_text">合计：￥<span class="price">00</span>元</span>
+			</div>
+			<div class="total_buy">下单</div>
+		</div>
+	</div>
+
+
+	<script src="./js/axios.min.js"></script>
+	<script src="/js/axios.config.js"></script>
+	<script src="./js/utils.js"></script>
+
+	<script>
+
+		var oTotal_price1 = document.querySelector('.flex .total_price .total_price_num');
+		var oTotal_price2 = document.querySelector('.bottom_fixed .total_text .price');
+		var oAddressList = document.querySelector('.bg .address-list');
+
+		var oTotalBuy = document.querySelector('.bottom_fixed .total_buy');
+
+		//选择地址箭头按钮 的 点击事件（带着参数跳转下一个页面）
+		var oSelectAddress = document.querySelector('.select_address img');
+		oSelectAddress.addEventListener('click', function () {
+			location.assign('./address-list.html?redirect=confirm-order')
+		})
+		//地址框的 的 点击事件（带着参数跳转下一个页面）
+		var oSelectAddress2 = document.querySelector('.address-list');
+		oSelectAddress2.addEventListener('click', function () {
+			location.assign('./address-list.html?redirect=confirm-order')
+		})
+
+
+
+		//获取购物车过来的数据 ---传过来的商品ID 、总价格
+		var goods = params('goods')
+		var total_price = params('total')
+		var totalPrice = total_price.slice(1, -1);
+		// console.log(aid)
+		// console.log(totalPrice)
+		//付款商品可能不止一件，使用，切割开来，
+		var goodsArray = goods.split(',')
+
+		//打开页面，直接发送axios，去请求数据--生成订单
+		axios.post('/order/settle', { goods: goodsArray })
+			.then(function (res) {
+				console.log(res)
+				var goodsList = []
+				var i = 0
+				//成功：
+				if (res.status) {
+					var good = '';
+					var object = {};
+					//如果获取到数据，渲染到到页面上
+					res.data.goods.forEach(function (item) {
+						var good_id = item.id;
+						var good_num = item.goods_num;
+						object = { id: good_id, num: good_num };
+						// console.log(object);
+						goodsList[i] = object;
+						i++;
+						// console.log(goodsList);
+						//将购物车中选中的商品渲染到页面上
+						good += `
+        <div class="good1" data-id=${item.id}>
+			<div class="goods-pic">
+				<a href="#">
+					<img src="${item.img_md}" alt="">
+				</a>
+			</div>
+			<div class="detail-introduce">
+				<div class="introduce">${item.name}</div>
+				<div class="specification">
+					<span class="capacity">白色</span>
+					<span class="goods-num">×${item.goods_num}</span>
+
+				</div>
+				<div class="price">￥<span>${item.price}</span></div>
+			</div>
+		</div>
+					`;
+					})
+					//商品位置---插入
+					var oGoods = document.querySelector(".goods");
+					oGoods.insertAdjacentHTML('afterbegin', good);
+
+
+					//当页面从选择收货地址页面返回来的时候，更改地址：
+					if (sessionStorage.address_id) {
+						axios.get('/address', { params: { id: sessionStorage.address_id } })
+							.then(function (item) {
+								console.log(item)
+								if (res.status) {
+									var change = `
+					<div class="top flex" data-id="${item.data.id}">
+						<div class="name">${item.data.name}</div>
+						<div class="tel">${item.data.tel}</div>
+						${item.data.isDefault ? '<div class="default">默认</div>' : "<div></div>"}
+					</div>
+					<div class="bottom">
+						<div class="adress">${item.data.province_name + item.data.city_name + item.data.county_name + item.data.town_name}</div>
+					</div>
+							`;
+									var oAdressList = document.querySelector('.adress-list');
+									oAddressList.insertAdjacentHTML('afterbegin', change);
+								}
+							})
+						//如果地址为更改过的，调用这里的下单按钮
+						oTotalBuy.addEventListener('click', function () {
+							axios.post('/order/create', { payment: totalPrice, addressId: sessionStorage.address_id, goodsList: goodsList })
+								.then(function (res) {
+									console.log(res);
+									if (res.status) {
+										location.assign(`./my-order-wait-pill.html?status=${3}`);
+									} else {
+										alert('不好意思，下单失败')
+									}
+
+								});
+						});
+
+
+					} else {
+						//生成默认地址并插入正确位置
+						// console.log(res.data.address.isDefault)
+						if (res.data.address) {
+							var address = `
+					<div class="top flex" data-id="${res.data.id}">
+						<div class="name">${res.data.address.name}</div>
+						<div class="tel">${res.data.address.tel}</div>
+						${res.data.address.isDefault ? '<div class="default">默认</div>' : "<div></div>"}
+					</div>
+					<div class="bottom">
+						<div class="adress">${res.data.address.province_name + res.data.address.city_name 
+							+ res.data.address.county_name + res.data.address.town_name}</div>
+					</div>
+                     `;
+							var oAdressList = document.querySelector('.adress-list');
+							oAddressList.insertAdjacentHTML('afterbegin', address);
+
+							//默认地址下的下单按钮
+							oTotalBuy.addEventListener('click', function () {
+								axios.post('/order/create', { payment: totalPrice, addressId: res.data.address.id, goodsList: goodsList })
+									.then(function (res) {
+										console.log(res);
+										if (res.status) {
+											location.assign(`./my-order-wait-pill.html?status=${3}`);
+										} else {
+											alert('不好意思，下单失败')
+										}
+
+									});
+							});
+
+						} else {
+							var address_null = `
+						<div class="null_address">无收货地址，请选择或新建收货地址</div>
+						`;
+							oAddressList.insertAdjacentHTML('afterbegin', address_null);
+						}
+
+					}
+
+				}
+				//商品的总价格（两个位置需要插入）
+				oTotal_price1.innerHTML = totalPrice
+				oTotal_price2.innerText = totalPrice
+
+
+			});
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>搜索</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/search_result.css">
+</head>
+
+<body>
+	<header>
+		<img class="arrow-left" src="./img/address/arrow.png" alt="">
+		<span class="title">搜索</span>
+	</header>
+	<div class="search-section">
+		<form class="search-box" action="">
+			<div><input type="text" value="马卡龙色 多功能早餐机"><button type="submit"><img src="./img/search/searchlogo.png"
+						alt=""></button></div>
+		</form>
+	</div>
+	<div class="result">
+		<ul class="nav">
+			<li>综合</li>
+			<li>销量</li>
+			<li>新品</li>
+			<li><span>价格</span><img src="./img/search_result/up-down.png" alt=""></li>
+		</ul>
+		<div class="product_list">
+
+		</div>
+	</div>
+	<img class="to_top" src="./img/search_null/to_top.png" alt="">
+
+	<script>
+		//查找相关元素：
+		var oProductList = document.querySelector(".product_list");
+
+		//进入页面直接发送ajax请求
+		//1、生成ajax实例
+		var ajax = new XMLHttpRequest();
+		//2、初始化请求（传参）
+		ajax.open("GET", "http://localhost:3002/goods/list?pageSize=5&pageIndex=2");
+		//3、发送
+		ajax.send();
+		//4、监听readyStatus
+		ajax.addEventListener('readystatechange', function () {
+			if (ajax.readyState === 4) {
+				var res = JSON.parse(ajax.responseText);
+				if (res.status) {
+					//渲染数据
+					res.data.forEach(function (item) {
+						//生成商品（循环生成）
+						var goods = `
+			<li class="item">
+				<a href="#">
+					<img src="${item.img_md}" alt="">
+					<div class="detail">
+						<div class="name">${item.name}</div>
+						<div class="introduce">${item.hotPoint}</div>
+						<div class="price"><span>￥</span>${item.price}</div>
+					</div>
+				</a>
+			</li>`;
+						//插入DOM
+						oProductList.insertAdjacentHTML('beforeend', goods);
+					});
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
